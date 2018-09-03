@@ -30,3 +30,7 @@ yarn add graphql-yoga
 yarn add helmet : 보안을 위한 미들웨어. 요청 때마다 미들웨어가 요청을 잠시 멈추고 검사한 후에, 위험지 않다면 요청을 계속 진행.
 yarn add morgan cors : 미들웨어
 yarn add @types/cors @types/helmet @types/morgan  --dev
+
+
+6강
+yarn add graphql-tools merge-graphql-schemas
