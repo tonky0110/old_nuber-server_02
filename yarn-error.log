@@ -30,8 +30,9 @@ npm manifest:
           "typescript": "^3.0.3"
       },
       "scripts":{
-          "dev":"cd src | nodemon --exec ts-node index.ts"
-      }}
+          "dev":"nodemon --exec ts-node ./src/index.ts -e ts,graphql"
+          /*  "dev": "nodemon --exec ts-node ./src/index.ts -e ts,graphql"  */
+      }
   }
 
 yarn manifest: 
@@ -1600,7 +1601,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/yn/-/yn-2.0.0.tgz#e5adabc8acf408f6385fc76495684c88e6af689a"
 
 Trace: 
-  SyntaxError: C:\workspace\Nomad\nuber-server\package.json: Unexpected token } in JSON at position 579
+  SyntaxError: C:\workspace\Nomad\nuber-server\package.json: Unexpected token / in JSON at position 591
       at JSON.parse (<anonymous>)
       at C:\Users\zip\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:770:59
       at Generator.next (<anonymous>)
