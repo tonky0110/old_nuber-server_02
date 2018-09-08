@@ -1,8 +1,7 @@
-import { ConnectionOptions } from 'typeorm';
+import { ConnectionOptions } from "typeorm";
 
-// using typeORM
 const connectionOptions: ConnectionOptions = {
-    type: "postgres",
+  type: "postgres",
   database: "nuber",
   synchronize: true,
   logging: true,
