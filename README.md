@@ -23,3 +23,26 @@ nuber-server
 yarn add typescript ts-node nodemon --dev
 yarn add tslint-config-prettier --dev
 yarn add @types/node --dev
+
+
+
+.....
+
+
+
+1.10
+yarn add typeorm
+yarn add pg
+/src/entities 생성.
+ormConfig.ts 세팅
+index.ts에서 connection연결.
+
+yarn add dotenv
+
+
+
+1.11 
+yarn add dotenv
+동영상강의 ./src/.env
+windows: ./.env
+
