@@ -46,3 +46,7 @@ yarn add dotenv
 동영상강의 ./src/.env
 windows: ./.env
 
+
+
+1.13
+yarn add class-validator
