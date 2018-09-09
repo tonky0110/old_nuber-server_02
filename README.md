@@ -55,8 +55,8 @@ yarn add class-validator
 ## Resolvers
 
 ### Public Resolvers:
-- [ ] Sign in / Sign Up with Facebook
-- [ ] Login with Email
+- [x] Sign in / Sign Up with Facebook
+- [x] Login with Email
 - [ ] Start Phone Number Verification
 - [ ] Complete Phone Number Verification
 - [ ] Sign Up with Email
