@@ -15,12 +15,15 @@ import {
 } from "typeorm";
 import Chat from "./Chat";
 import Message from "./Message";
+import Ride from './Ride';
+import Verification from "./Verification";
 
 const BCRYPT_ROUNDS = 10;
 
 @Entity()
 class User extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: "text", nullable: true })
   @IsEmail()
@@ -74,28 +77,42 @@ class User extends BaseEntity {
   @OneToMany(type => Message, message => message.user)
   messages: Message[];
 
-  @CreateDateColumn() createdAt: string;
+  @OneToMany(type => Verification, verification => verification.user)
+  verifications: Verification[];
 
-  @UpdateDateColumn() updatedAt: string;
+  @OneToMany(type => Ride, ride => ride.passenger)
+  ridesAsPassenger: Ride[];
+
+  @OneToMany(type => Ride, ride => ride.driver)
+  ridesAsDriver: Ride[];
+
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 
   get fullName(): string {
     return `${this.firstName} ${this.lastName}`;
   }
 
-  public comparePassword(password: string, hashString: string): Promise<boolean>{
+  public comparePassword(
+    password: string,
+    hashString: string
+  ): Promise<boolean> {
     return bcrypt.compare(password, this.password);
-  } 
-  
+  }
+
   @BeforeInsert()
   @BeforeUpdate()
-  async savePassword() :Promise<void> {
-    if(this.password){
+  async savePassword(): Promise<void> {
+    if (this.password) {
       const hashedPassword = await this.hashPassword(this.password);
       this.password = hashedPassword;
     }
   }
-  
-  private hashPassword(password: string):Promise<string> {
+
+  private hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, BCRYPT_ROUNDS);
   }
 }

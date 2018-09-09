@@ -4,6 +4,8 @@ import helmet from "helmet";
 import logger from "morgan";
 import schema from "./schema";
 
+import { Resolvers } from'./types/resolvers';
+
 class App {
   public app: GraphQLServer;
   public pubSub: any;
@@ -21,3 +23,10 @@ class App {
 }
 
 export default new App().app;
+
+
+const Resolvers: Resolvers = {
+  Query: {
+    sayHello: () => ""
+  }
+};
