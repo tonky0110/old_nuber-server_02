@@ -58,6 +58,7 @@ yarn add class-validator
 - [x] Sign in / Sign Up with Facebook
 - [x] Login with Email
 - [ ] Start Phone Number Verification
+    -- twilio
 - [ ] Complete Phone Number Verification
 - [ ] Sign Up with Email
 
