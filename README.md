@@ -59,7 +59,7 @@ yarn add class-validator
 - [x] Sign in with Email
 - [x] Start Phone Number Verification
     -- twilio
-- [ ] Complete Phone Number Verification
+- [x] Complete Phone Number Verification
 - [ ] Sign Up with Email
 
 ---
