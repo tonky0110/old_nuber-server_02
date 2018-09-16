@@ -20,13 +20,14 @@ class App {
     this.app.express.use(logger("dev"));
     this.app.express.use(helmet());
   };
+
+  private jwt = async (req, res, next): Promise<void> => {
+    const token = req.get("X-JWT");
+    if(token){
+     
+    }
+  }
 }
 
+
 export default new App().app;
-
-
-const Resolvers: Resolvers = {
-  Query: {
-    sayHello: () => ""
-  }
-};
