@@ -66,6 +66,8 @@ yarn add class-validator
 
 ### Authentication:
 - [ ] Generate JWT
+        yarn add @types/jsonwebtoken --dev
+        Strong password generator 에서 51자리 생성 후 .env에서 추가.
 - [ ] Verify JWT
 
 
