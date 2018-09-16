@@ -56,18 +56,22 @@ yarn add class-validator
 
 ### Public Resolvers:
 - [x] Sign in / Sign Up with Facebook
-- [x] Login with Email
-- [ ] Start Phone Number Verification
+- [x] Sign in with Email
+- [x] Start Phone Number Verification
     -- twilio
 - [ ] Complete Phone Number Verification
 - [ ] Sign Up with Email
 
 ---
 
-### Private Resolvers:
-
+### Authentication:
 - [ ] Generate JWT
 - [ ] Verify JWT
+
+
+
+### Private Resolvers:
+
 - [ ] Verify Email
 - [ ] Get My Profile
 - [ ] Update My Profile

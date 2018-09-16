@@ -13,19 +13,15 @@ const resolvers: Resolvers = {
             args: StartPhoneVerificationMutationArgs
         ): Promise<StartPhoneVerificationResponse> => {
             const { phoneNumber  } = args;
-
             try{
                 const existingVerification = await Verification.findOne({payload: phoneNumber});
                 if (existingVerification){
                     existingVerification.remove();
                 }
-                const newVerification = await Verification.create(
-                  {
+                const newVerification = await Verification.create({
                     payload: phoneNumber,
                     target: "PHONE"
-                  }
-                ).save();
-                console.log(newVerification);
+                }).save();
                 // to do: send sms
                 await sendVerificationSMS(newVerification.payload, newVerification.key);
                 return {

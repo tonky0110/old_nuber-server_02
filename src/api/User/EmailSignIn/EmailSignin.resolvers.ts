@@ -9,7 +9,11 @@ const resolvers: Resolvers = {
             try {
                 const user = await User.findOne({ email });
                 if(!user){
-                    return { ok: false, error: "No User found with that email", token: null };   
+                    return { 
+                        ok: false, 
+                        error: "No User found with that email", 
+                        token: null 
+                    };   
                 }
                 // compare password
                 const checkPassword = await user.comparePassword(password);
@@ -27,9 +31,12 @@ const resolvers: Resolvers = {
                     }
                 }
             }catch(error){
-                return{ ok: false, error: error.message, token: null };
+                return { 
+                    ok: false, 
+                    error: error.message, 
+                    token: null 
+                };
             }
-
         }
     }
 }
