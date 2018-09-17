@@ -65,17 +65,19 @@ yarn add class-validator
 ---
 
 ### Authentication:
-- [ ] Generate JWT
+- [x] Generate JWT
         yarn add @types/jsonwebtoken --dev
         Strong password generator 에서 51자리 생성 후 .env에서 추가.
-- [ ] Verify JWT
+- [x] Verify JWT
 
 
 
 ### Private Resolvers:
 
+- [x] Get My Profile
 - [ ] Verify Email
-- [ ] Get My Profile
+    yarn add mailgun-js
+    yarn add @types/mailgun-js --dev
 - [ ] Update My Profile
 - [ ] Toggle Driving Mode
 - [ ] Report location / Orientation 
