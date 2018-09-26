@@ -8,14 +8,14 @@ import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
 
 const resolvers: Resolvers = {
-	Mutation {
+	Mutation: {
 		AddPlace: privateResolver(
 			async(
 				_,
 				args: AddPlaceMutationArgs,
 				{req}
 			): Promise<AddPlaceResponse> => {
-				const user = req.user;
+				const user:User = req.user;
 				try{
 					await Place.create({ ...args, user }).save();
 					return {

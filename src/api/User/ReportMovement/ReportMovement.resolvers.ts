@@ -1,29 +1,29 @@
 import User from "../../../entities/User";
-import { 
-	ReportMovementMutationArgs, 
-	ReportMovementResponse 
+import {
+	ReportMovementMutationArgs,
+	ReportMovementResponse
 } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolvers";
-import cleanNullArgs from "../../../utils/cleanNullArgs";
+import cleanNullArgs from "../../../utils/cleanNullArg";
 import privateResolver from "../../../utils/privateResolver";
 
 const resolvers: Resolvers = {
 	Mutation: {
-		ReposrtMovement: privateResolver(
-			async(
-				_, 
-				args: ReportMovementMutationArgs, 
-				{req}
+		ReportMovement: privateResolver(
+			async (
+				_,
+				args: ReportMovementMutationArgs,
+				{ req }
 			): Promise<ReportMovementResponse> => {
 				const user: User = req.user;
 				const notNull = cleanNullArgs(args);
-				try{
-					await User.update({id: user.id}, { ...notNull});
+				try {
+					await User.update({ id: user.id }, { ...notNull });
 					return {
 						ok: true,
 						error: null
 					};
-				}catch(error){
+				} catch (error) {
 					return {
 						ok: false,
 						error: error.message
