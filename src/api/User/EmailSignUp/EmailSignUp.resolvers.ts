@@ -1,39 +1,42 @@
-import { EmailSignUpMutationArgs, EmailSignUpResponse } from "../../../types/graph";
-import { Resolvers } from "../../../types/resolvers";
 import User from "../../../entities/User";
-import createJWT from "../../../utils/createJWT";
 import Verification from "../../../entities/Verification";
+import {
+    EmailSignUpMutationArgs,
+    EmailSignUpResponse
+} from "../../../types/graph";
+import { Resolvers } from "../../../types/resolvers";
+import createJWT from "../../../utils/createJWT";
 import { sendVerificationEmail } from "../../../utils/sendEmail";
 
 const resolvers: Resolvers = {
     Mutation: {
-        EmailSignUp: async(
-            _, 
-            args:EmailSignUpMutationArgs
+        EmailSignUp: async (
+            _,
+            args: EmailSignUpMutationArgs
         ): Promise<EmailSignUpResponse> => {
-            const  { email } = args;
+            const { email } = args;
             try {
-                const existUser = await User.findOne({ email });
-                if(existUser) {
+                const existingUser = await User.findOne({ email });
+                if (existingUser) {
                     return {
                         ok: false,
-                        error: "You should log in instead.",
+                        error: "You should log in instead",
                         token: null
                     };
-                }else {
+                } else {
                     const phoneVerification = await Verification.findOne({
-                        payload: args.phoneNumber, 
+                        payload: args.phoneNumber,
                         verified: true
                     });
-                    if(phoneVerification){
+                    if (phoneVerification) {
                         const newUser = await User.create({ ...args }).save();
                         if (newUser.email) {
                             const emailVerification = await Verification.create({
                                 payload: newUser.email,
                                 target: "EMAIL"
-                            });
+                            }).save();
                             await sendVerificationEmail(
-                                newUser.fullName, 
+                                newUser.fullName,
                                 emailVerification.key
                             );
                         }
@@ -42,21 +45,21 @@ const resolvers: Resolvers = {
                             ok: true,
                             error: null,
                             token
-                        }
-                    }else {
+                        };
+                    } else {
                         return {
                             ok: false,
-                            error: "You haven't verified you phone number.",
+                            error: "You haven't verified your phone number",
                             token: null
                         };
                     }
                 }
-            }catch(error) {
+            } catch (error) {
                 return {
                     ok: false,
                     error: error.message,
                     token: null
-                }
+                };
             }
         }
     }
