@@ -19,8 +19,8 @@ type User {
   fbId: String
   chat: Chat
   messages: [Message]
-  RidesAsPassenger: [Ride]
-  RidesAsDriver: [Ride]
+  ridesAsPassenger: [Ride]
+  ridesAsDriver: [Ride]
   places: [Place]
   createdAt: String!
   updatedAt: String
