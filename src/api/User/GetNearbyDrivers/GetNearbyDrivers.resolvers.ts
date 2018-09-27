@@ -1,20 +1,16 @@
-import { Resolvers } from "../../../types/resolvers";
-import privateResolver from "../../../utils/privateResolver";
+import { Between, getRepository } from "typeorm";
 import User from "../../../entities/User";
 import { GetNearbyDriversResponse } from "../../../types/graph";
-import { Between, getRepository } from "typeorm";
+import { Resolvers } from "../../../types/resolvers";
+import privateResolver from "../../../utils/privateResolver";
 
 const resolvers: Resolvers = {
 	Query: {
-		GetNearByDrivers: privateResolver(
-			async(
-				_,
-				__,
-				{ req }
-			): Promise<GetNearbyDriversResponse> => {
+		GetNearbyDrivers: privateResolver(
+			async (_, __, { req }): Promise<GetNearbyDriversResponse> => {
 				const user: User = req.user;
 				const { lastLat, lastLng } = user;
-				try{
+				try {
 					const drivers: User[] = await getRepository(User).find({
 						isDriving: true,
 						lastLat: Between(lastLat - 0.05, lastLat + 0.05),
@@ -24,18 +20,16 @@ const resolvers: Resolvers = {
 						ok: true,
 						error: null,
 						drivers
-					}
-				}catch(error){
+					};
+				} catch (error) {
 					return {
 						ok: false,
 						error: error.message,
 						drivers: null
-					}
+					};
 				}
-
 			}
 		)
 	}
-}
-
+};
 export default resolvers;
