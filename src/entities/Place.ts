@@ -11,8 +11,7 @@ import User from "./User";
 
 @Entity()
 class Place extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn() id: number;
 
   @Column({ type: "text" })
   name: string;
@@ -35,10 +34,8 @@ class Place extends BaseEntity {
   @ManyToOne(type => User, user => user.places)
   user: User;
 
-  @CreateDateColumn()
-  createdAt: string;
+  @CreateDateColumn() createdAt: string;
 
-  @UpdateDateColumn()
-  updatedAt: string;
+  @UpdateDateColumn() updatedAt: string;
 }
 export default Place;
