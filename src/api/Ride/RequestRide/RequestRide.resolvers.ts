@@ -12,22 +12,32 @@ const resolvers: Resolvers = {
         args: RequestRideMutationArgs,
         { req, pubSub }
       ): Promise<RequestRideResponse> => {
-        const user: User = req.user; // 세션 사용자 계정
-        try {
-          const ride = await Ride.create({ ...args, passenger: user }).save();
-          pubSub.publish("rideRequest", { NearbyRideSubscription: ride });
-          return {
-            ok: true,
-            error: null,
-            ride
-          };
-        } catch (error) {
-          return {
-            ok: false,
-            error: error.message,
-            ride: null
-          };
-        }
+		const user: User = req.user; // 세션 사용자 계정
+		if( !user.isRiding){
+			try {
+			  const ride = await Ride.create({ ...args, passenger: user }).save();
+			  pubSub.publish("rideRequest", { NearbyRideSubscription: ride });
+			  user.isRiding = true;
+			  user.save();
+			  return {
+				ok: true,
+				error: null,
+				ride
+			  };
+			} catch (error) {
+			  return {
+				ok: false,
+				error: error.message,
+				ride: null
+			  };
+			}
+		}else{
+			return {
+				ok: false,
+				error: "You can't request tow rides.",
+				ride: null
+			};
+		}
       }
     )
   }
