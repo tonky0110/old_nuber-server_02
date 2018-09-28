@@ -107,6 +107,7 @@ class User extends BaseEntity {
     if (this.password) {
       console.log("password:", this.password);
       const hashedPassword = await this.hashPassword(this.password);
+      console.log("new password:", hashedPassword);
       this.password = hashedPassword;
     }
   }
