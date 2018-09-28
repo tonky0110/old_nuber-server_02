@@ -15,10 +15,9 @@ class App {
     this.app = new GraphQLServer({
       schema,
       context: req => {
-        //console.log("req:", req);
-        const { connection : { context = null} = {} } = req;
-        return { 
-          req: req.request, 
+        const { connection: { context = null } = {} } = req;
+        return {
+          req: req.request,
           pubSub: this.pubSub,
           context
         };
@@ -50,6 +49,5 @@ class App {
     next();
   };
 }
-
 
 export default new App().app;
